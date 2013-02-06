@@ -31,6 +31,8 @@ void play_rtttl(char *p)
     p++;                   // skip comma
   }
 
+  //Serial.print("ddur: "); Serial.println(default_dur, 10);
+
   // get default octave
   if(*p == 'o')
   {
@@ -39,6 +41,8 @@ void play_rtttl(char *p)
     if(num >= 3 && num <=7) default_oct = num;
     p++;                   // skip comma
   }
+
+  //Serial.print("doct: "); Serial.println(default_oct, 10);
 
   // get BPM
   if(*p == 'b')
@@ -53,12 +57,12 @@ void play_rtttl(char *p)
     p++;                   // skip colon
   }
 
-
+  //Serial.print("bpm: "); Serial.println(bpm, 10);
 
   // BPM usually expresses the number of quarter notes per minute
   wholenote = (60 * 1000L / bpm) * 4;  // this is the time for whole note (in milliseconds)
 
-
+  //Serial.print("wn: "); Serial.println(wholenote, 10);
 
 
   // now begin note loop
@@ -140,13 +144,22 @@ void play_rtttl(char *p)
 
     if(note)
     {
+      //Serial.print("Playing: ");
+      //Serial.print(scale, 10); Serial.print(' ');
+      //Serial.print(note, 10); Serial.print(" (");
+      //Serial.print(notes[(scale - 4) * 12 + note], 10);
+      //Serial.print(") ");
+      //Serial.println(duration, 10);
       tone1.play(notes[(scale - 4) * 12 + note]);
       delay(duration);
       tone1.stop();
     }
     else
     {
+      //Serial.print("Pausing: ");
+      //Serial.println(duration, 10);
       delay(duration);
     }
   }
 }
+
